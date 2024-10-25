@@ -6,9 +6,9 @@ import { store } from './store'
 
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
+  // <StrictMode>
     <Provider store={store}>
       <JournalApp />
     </Provider>
-  </StrictMode>,
+  // </StrictMode>,
 )

@@ -1,15 +1,16 @@
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { Button, Grid2, TextField, Typography, Link } from "@mui/material"
 import { Google } from '@mui/icons-material'
 import { Link as RouterLink } from "react-router-dom"
 import { AuthLayout } from "../layout"
 import { useForm } from "../../hooks"
 import { checkingAuthentication, startGoogleSignIn } from "../../store/auth"
-import { AppDispatch } from "../../store"
+import { AppDispatch, RootState } from "../../store"
+import { useMemo } from "react"
 
 export const LoginPage = () => {
 
-
+  const { status } = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch<AppDispatch>(); 
 
   //TODO: implementar formulario haciendo uso de Zod (?)
@@ -17,6 +18,8 @@ export const LoginPage = () => {
     email: '',
     password: ''
   });
+
+  const isAuthenticating = useMemo(() => status === 'checking', [status]);
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -62,13 +65,13 @@ export const LoginPage = () => {
         <Grid2 container spacing={2} sx={{ mb: 2, mt: 2 }}>
 
           <Grid2 size={{ xs: 12, sm: 6 }}>
-            <Button type="submit" variant="contained" fullWidth>
+            <Button disabled={isAuthenticating} type="submit" variant="contained" fullWidth>
               Login
             </Button>
           </Grid2>
 
           <Grid2 size={{ xs: 12, sm: 6 }}>
-            <Button onClick={onGoogleSignIn} variant="contained" fullWidth>
+            <Button disabled={isAuthenticating} onClick={onGoogleSignIn} variant="contained" fullWidth>
               <Google />
               <Typography sx={{ ml: 1 }}>Login with Google</Typography>
             </Button>
