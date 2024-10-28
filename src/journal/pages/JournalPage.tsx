@@ -4,6 +4,8 @@ import { NoteView, NothingSelectedView } from "../views"
 import { AddOutlined } from "@mui/icons-material"
 
 export const JournalPage = () => {
+
+
   return (
     <JournalLayout>
 

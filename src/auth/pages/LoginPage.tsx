@@ -1,17 +1,18 @@
 import { useDispatch, useSelector } from "react-redux"
-import { Button, Grid2, TextField, Typography, Link } from "@mui/material"
+import { Button, Grid2, TextField, Typography, Link, Alert } from "@mui/material"
 import { Google } from '@mui/icons-material'
-import { Link as RouterLink } from "react-router-dom"
+import { Link as RouterLink, useNavigate } from "react-router-dom"
 import { AuthLayout } from "../layout"
 import { useForm } from "../../hooks"
-import { checkingAuthentication, startGoogleSignIn } from "../../store/auth"
+import { startGoogleSignIn, startLoginWithEmailAndPassword } from "../../store/auth"
 import { AppDispatch, RootState } from "../../store"
 import { useMemo } from "react"
 
 export const LoginPage = () => {
 
-  const { status } = useSelector((state: RootState) => state.auth);
-  const dispatch = useDispatch<AppDispatch>(); 
+  const { status, errorMessage } = useSelector((state: RootState) => state.auth);
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
 
   //TODO: implementar formulario haciendo uso de Zod (?)
   const { email, password, onInputChange } = useForm({
@@ -24,11 +25,13 @@ export const LoginPage = () => {
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log({ email, password })
-    dispatch(checkingAuthentication({ email, password }));
+    dispatch(startLoginWithEmailAndPassword({ email, password }));
+    navigate('/');
   }
 
   const onGoogleSignIn = () => {
     dispatch(startGoogleSignIn());
+    navigate('/');
   }
 
 
@@ -60,6 +63,11 @@ export const LoginPage = () => {
             />
           </Grid2>
 
+        </Grid2>
+
+
+        <Grid2 size={{ xs: 12 }} sx={{ mt: 2 }} display={!!errorMessage ? '' : 'none'}>
+          <Alert severity="error">{errorMessage as string}</Alert>
         </Grid2>
 
         <Grid2 container spacing={2} sx={{ mb: 2, mt: 2 }}>

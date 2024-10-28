@@ -15,7 +15,7 @@ export const AuthLayout = ({ children, title }: Props) => {
       justifyContent='center'
       sx={{ minHeight: '100vh', backgroundColor: 'primary.main', padding: 4 }}
     >
-      <Grid2 sx={{ boxShadow: '0px 5px 5px rgba(0, 0, 0, 0.2)', backgroundColor: 'white', padding: 3, borderRadius: 2 }}>
+      <Grid2 sx={{ width: { sm: 450 }, boxShadow: '0px 5px 5px rgba(0, 0, 0, 0.2)', backgroundColor: 'white', padding: 3, borderRadius: 2 }}>
 
         <Typography variant="h5" sx={{ display: "flex", alignItems: 'center', justifyContent: 'center', mb: 1 }} >{title}</Typography>
 

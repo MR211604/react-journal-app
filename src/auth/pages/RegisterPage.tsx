@@ -1,10 +1,10 @@
-import { Button, Grid2, Link, TextField } from "@mui/material"
+import { Alert, Button, Grid2, Link, TextField } from "@mui/material"
 import { Link as RouterLink } from "react-router-dom"
 import { AuthLayout } from "../layout"
 import { FormState, useForm } from "../../hooks"
-import { useState } from "react"
-import { useDispatch } from "react-redux"
-import { AppDispatch } from "../../store"
+import { useMemo, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { AppDispatch, RootState } from "../../store"
 import { startCreateUserWithEmailAndPassword } from "../../store/auth"
 
 
@@ -25,6 +25,8 @@ export const RegisterPage = () => {
 
   const dispatch = useDispatch<AppDispatch>();
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+  const { status, errorMessage } = useSelector((state: RootState) => state.auth);
+  const isCheckingAuthentication = useMemo(() => status === 'checking', [status]);
   const { email, password, displayName, onInputChange, displayNameValid, passwordValid, emailValid, isFormValid, formState } = useForm<RegisterForm>({
     email: "",
     password: "",
@@ -34,9 +36,8 @@ export const RegisterPage = () => {
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsFormSubmitted(true);
-    if(!isFormValid) return;
-    dispatch( startCreateUserWithEmailAndPassword(formState) )
-    
+    if (!isFormValid) return;
+    dispatch(startCreateUserWithEmailAndPassword(formState))
   }
 
   return (
@@ -86,19 +87,23 @@ export const RegisterPage = () => {
               helperText={passwordValid as string}
             />
           </Grid2>
-
-
         </Grid2>
 
-        <Grid2 container spacing={2} sx={{ mb: 2, mt: 2 }}>
+
+        <Grid2 size={{ xs: 12 }} sx={{ mt: 2 }} display={!!errorMessage ? '' : 'none'}>
+          <Alert severity="error">{errorMessage as string}</Alert>
+        </Grid2>
+
+        <Grid2 container sx={{ mb: 2, mt: 2 }}>
 
           <Grid2 size={{ xs: 12, sm: 12 }}>
-            <Button type="submit" variant="contained" fullWidth>
+            <Button disabled={isCheckingAuthentication} type="submit" variant="contained" fullWidth>
               Create account
             </Button>
           </Grid2>
 
         </Grid2>
+
 
         <Grid2 container direction='row' justifyContent='end'>
           <Link component={RouterLink} color="inherit" to='/auth/login'>
