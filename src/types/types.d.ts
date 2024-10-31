@@ -6,3 +6,11 @@ export interface User {
 }
 
 export type UserWithoutDisplayName = Omit<User, 'displayName'>;
+
+export interface Note {
+  id?: string;
+  title: string;
+  body: string;
+  date: number;
+  imageURL?: string[];
+}

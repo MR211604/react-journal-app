@@ -8,6 +8,11 @@ import { startGoogleSignIn, startLoginWithEmailAndPassword } from "../../store/a
 import { AppDispatch, RootState } from "../../store"
 import { useMemo } from "react"
 
+const formData = {
+  email: '',
+  password: ''
+}
+
 export const LoginPage = () => {
 
   const { status, errorMessage } = useSelector((state: RootState) => state.auth);
@@ -15,10 +20,7 @@ export const LoginPage = () => {
   const navigate = useNavigate();
 
   //TODO: implementar formulario haciendo uso de Zod (?)
-  const { email, password, onInputChange } = useForm({
-    email: '',
-    password: ''
-  });
+  const { email, password, onInputChange } = useForm(formData);
 
   const isAuthenticating = useMemo(() => status === 'checking', [status]);
 

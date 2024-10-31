@@ -38,6 +38,9 @@ importers:
       react-router-dom:
         specifier: ^6.27.0
         version: 6.27.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      sweetalert2:
+        specifier: ^11.14.4
+        version: 11.14.4
     devDependencies:
       '@eslint/js':
         specifier: ^9.11.1
@@ -53,7 +56,7 @@ importers:
         version: 18.3.1
       '@vitejs/plugin-react-swc':
         specifier: ^3.5.0
-        version: 3.7.1(vite@5.4.9)
+        version: 3.7.1(vite@5.4.9(@types/node@22.8.1))
       eslint:
         specifier: ^9.11.1
         version: 9.13.0
@@ -74,7 +77,7 @@ importers:
         version: 8.10.0(eslint@9.13.0)(typescript@5.6.3)
       vite:
         specifier: ^5.4.8
-        version: 5.4.9
+        version: 5.4.9(@types/node@22.8.1)
 
 packages:
 
@@ -1611,6 +1614,9 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
 
+  sweetalert2@11.14.4:
+    resolution: {integrity: sha512-8QMzjxCuinwm18EK5AtYvuhP+lRMRxTWVXy8om9wGlULsXSI4TD29kyih3VYrSXMMBlD4EShFvNC7slhTC7j0w==}
+
   text-table@0.2.0:
     resolution: {integrity: sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw==}
 
@@ -2690,10 +2696,10 @@ snapshots:
       '@typescript-eslint/types': 8.10.0
       eslint-visitor-keys: 3.4.3
 
-  '@vitejs/plugin-react-swc@3.7.1(vite@5.4.9)':
+  '@vitejs/plugin-react-swc@3.7.1(vite@5.4.9(@types/node@22.8.1))':
     dependencies:
       '@swc/core': 1.7.36
-      vite: 5.4.9
+      vite: 5.4.9(@types/node@22.8.1)
     transitivePeerDependencies:
       - '@swc/helpers'
 
@@ -3336,6 +3342,8 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
+  sweetalert2@11.14.4: {}
+
   text-table@0.2.0: {}
 
   to-fast-properties@2.0.0: {}
@@ -3377,12 +3385,13 @@ snapshots:
     dependencies:
       react: 18.3.1
 
-  vite@5.4.9:
+  vite@5.4.9(@types/node@22.8.1):
     dependencies:
       esbuild: 0.21.5
       postcss: 8.4.47
       rollup: 4.24.0
     optionalDependencies:
+      '@types/node': 22.8.1
       fsevents: 2.3.3
 
   websocket-driver@0.7.4:
