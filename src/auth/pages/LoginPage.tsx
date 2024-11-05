@@ -1,11 +1,9 @@
-import { useDispatch, useSelector } from "react-redux"
 import { Button, Grid2, TextField, Typography, Link, Alert } from "@mui/material"
 import { Google } from '@mui/icons-material'
 import { Link as RouterLink, useNavigate } from "react-router-dom"
 import { AuthLayout } from "../layout"
-import { useForm } from "../../hooks"
+import { useAppDispatch, useAppSelector, useForm } from "../../hooks"
 import { startGoogleSignIn, startLoginWithEmailAndPassword } from "../../store/auth"
-import { AppDispatch, RootState } from "../../store"
 import { useMemo } from "react"
 
 const formData = {
@@ -15,8 +13,8 @@ const formData = {
 
 export const LoginPage = () => {
 
-  const { status, errorMessage } = useSelector((state: RootState) => state.auth);
-  const dispatch = useDispatch<AppDispatch>();
+  const { status, errorMessage } = useAppSelector((state) => state.auth)
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   //TODO: implementar formulario haciendo uso de Zod (?)

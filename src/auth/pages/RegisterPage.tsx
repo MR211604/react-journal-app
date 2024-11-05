@@ -1,10 +1,8 @@
 import { Alert, Button, Grid2, Link, TextField } from "@mui/material"
 import { Link as RouterLink } from "react-router-dom"
 import { AuthLayout } from "../layout"
-import { FormState, useForm } from "../../hooks"
+import { FormState, useAppDispatch, useAppSelector, useForm } from "../../hooks"
 import { useMemo, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { AppDispatch, RootState } from "../../store"
 import { startCreateUserWithEmailAndPassword } from "../../store/auth"
 
 
@@ -23,9 +21,9 @@ interface RegisterForm extends FormState {
 
 export const RegisterPage = () => {
 
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
-  const { status, errorMessage } = useSelector((state: RootState) => state.auth);
+  const { status, errorMessage } = useAppSelector((state) => state.auth);
   const isCheckingAuthentication = useMemo(() => status === 'checking', [status]);
   const { email, password, displayName, onInputChange, displayNameValid, passwordValid, emailValid, isFormValid, formState } = useForm<RegisterForm>({
     email: "",

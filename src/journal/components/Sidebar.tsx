@@ -1,7 +1,6 @@
 import { Box, Divider, Drawer, List, Toolbar, Typography } from "@mui/material"
-import { useSelector } from "react-redux"
-import { RootState } from "../../store"
 import SideBarItem from "./SideBarItem"
+import { useAppSelector } from "../../hooks"
 
 interface Props {
   drawerWidth: number
@@ -9,8 +8,8 @@ interface Props {
 
 export const Sidebar = ({ drawerWidth = 240 }: Props) => {
 
-  const { displayName } = useSelector((state: RootState) => state.auth)
-  const { notes } = useSelector((state: RootState) => state.journal)
+  const { displayName } = useAppSelector((state) => state.auth)
+  const { notes } = useAppSelector((state) => state.journal)
 
   return (
     <Box

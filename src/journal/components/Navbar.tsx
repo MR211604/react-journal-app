@@ -1,8 +1,7 @@
 import { LogoutOutlined, MenuOutlined } from "@mui/icons-material"
 import { AppBar, Grid, IconButton, Toolbar, Typography } from "@mui/material"
-import { useDispatch } from "react-redux"
-import { AppDispatch } from "../../store"
 import { startLogout } from "../../store/auth"
+import { useAppDispatch } from "../../hooks"
 
 interface Props {
   drawerWidth: number
@@ -10,7 +9,7 @@ interface Props {
 
 export const Navbar = ({ drawerWidth }: Props) => {
 
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
 
   const onLogout = () => {
     dispatch(startLogout());

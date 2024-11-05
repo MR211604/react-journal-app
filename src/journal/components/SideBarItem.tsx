@@ -2,9 +2,8 @@ import { TurnedInNot } from "@mui/icons-material";
 import { Grid, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import { Note } from "../../types/types";
 import { useMemo } from "react";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../store";
 import { setActiveNote } from "../../store/journal";
+import { useAppDispatch } from "../../hooks";
 
 interface Props {
   note: Note
@@ -12,7 +11,7 @@ interface Props {
 
 export default function SideBarItem({ note }: Props) {
 
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
 
   const newTitle = useMemo(() => {
     return note.title.length > 17
